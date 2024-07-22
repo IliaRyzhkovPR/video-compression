@@ -1,7 +1,7 @@
 import subprocess
 
-input_file = '[path to your input video file]'
-output_file = '[path to your output video file]'
+input_file = '/Users/iliaryzhkov/Downloads/Cruella.2021.WEB-DL.1080p.mkv'
+output_file = '/Users/iliaryzhkov/Downloads/Cruella.mp4'
 log_file = '[path to your log file]'
 target_size = 4 * 1024 * 1024 * 1024  # 4GB in bytes
 
@@ -16,6 +16,7 @@ ffmpeg_command = [
     'ffmpeg',
     '-i', input_file,
     '-map', '0',  # Map all streams
+    '-map', '-0:5',  # Exclude stream #5 (attached picture)
     '-map', '-0:6',  # Exclude stream #6
     '-c:v', 'libx264',  # Video codec
     '-b:v', str(int(total_bitrate * 0.75)),  # Set video bitrate to 75% of total bitrate
